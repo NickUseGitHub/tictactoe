@@ -94,40 +94,112 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
+      // appBar: AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(widget.title),
+      // ),
+      body: Flex(
+        direction: Axis.vertical,
+        mainAxisAlignment: MainAxisAlignment.start,
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        children: <Widget>[
+          Container(
+            height: 500,
+            child: GridView.count(
+              primary: false,
+              padding: const EdgeInsets.all(20),
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 3,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[100],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[200],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[300],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[400],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[500],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[600],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[600],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[600],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.teal[600],
+                  child: const Image(
+                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          ),
+          Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
+          const Text("Hello world")
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
