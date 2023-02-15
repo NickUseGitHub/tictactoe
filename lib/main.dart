@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import './widgets/boxplay.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -62,27 +63,20 @@ class _MyHomePageState extends State<MyHomePage> {
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
     // ignore_for_file: avoid_print
-    print('ready in 3...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
-    await Future.delayed(const Duration(seconds: 1));
     print('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
     print('go!');
     FlutterNativeSplash.remove();
   }
 
-  int _counter = 0;
+  List<String> _boxTables = ['', '', '', '', '', '', '', '', ''];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  _onBoxPlayClick(int index) {
+    return () {
+      setState(() {
+        _boxTables[index] = 'x';
+      });
+    };
   }
 
   @override
@@ -113,62 +107,15 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               crossAxisCount: 3,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[100],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[200],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[300],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[400],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[500],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[600],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[600],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[600],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.teal[600],
-                  child: const Image(
-                      fit: BoxFit.contain, image: AssetImage('assets/x.png')),
-                ),
-              ],
+              children: _boxTables.asMap().entries.map((character) {
+                int idx = character.key;
+                String val = character.value;
+
+                return BoxPlay(
+                  display: val,
+                  onBoxPlayClick: _onBoxPlayClick(idx),
+                );
+              }).toList(),
             ),
           ),
           Column(
@@ -188,24 +135,15 @@ class _MyHomePageState extends State<MyHomePage> {
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
+            children: const <Widget>[
               Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
+                'You have pushed the button this many times:',
               ),
             ],
           ),
           const Text("Hello world")
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
