@@ -70,11 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<String> _boxTables = ['', '', '', '', '', '', '', '', ''];
+  int _countClick = 0;
 
   _onBoxPlayClick(int index) {
     return () {
+      if (_countClick >= 9 || _boxTables[index].isNotEmpty) {
+        return;
+      }
+
       setState(() {
-        _boxTables[index] = 'x';
+        _countClick += 1;
+        _boxTables[index] = _countClick % 2 == 1 ? 'x' : 'o';
       });
     };
   }
@@ -82,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _onFloatButtonClick() {
     setState(() {
       _boxTables = ['', '', '', '', '', '', '', '', ''];
+      _countClick = 0;
     });
   }
 
