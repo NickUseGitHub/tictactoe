@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import './widgets/boxplay.dart';
+import 'package:tictactoe/pages/board.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -63,33 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
     // ignore_for_file: avoid_print
+    print('ready in 2...');
+    await Future.delayed(const Duration(seconds: 1));
     print('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
     print('go!');
     FlutterNativeSplash.remove();
-  }
-
-  List<String> _boxTables = ['', '', '', '', '', '', '', '', ''];
-  int _countClick = 0;
-
-  _onBoxPlayClick(int index) {
-    return () {
-      if (_countClick >= 9 || _boxTables[index].isNotEmpty) {
-        return;
-      }
-
-      setState(() {
-        _countClick += 1;
-        _boxTables[index] = _countClick % 2 == 1 ? 'x' : 'o';
-      });
-    };
-  }
-
-  _onFloatButtonClick() {
-    setState(() {
-      _boxTables = ['', '', '', '', '', '', '', '', ''];
-      _countClick = 0;
-    });
   }
 
   @override
@@ -100,68 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
+    return const Scaffold(
       // appBar: AppBar(
       //   // Here we take the value from the MyHomePage object that was created by
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(widget.title),
       // ),
-      body: Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.start,
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        children: <Widget>[
-          Container(
-            height: 500,
-            child: GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 3,
-              children: _boxTables.asMap().entries.map((character) {
-                int idx = character.key;
-                String val = character.value;
-
-                return BoxPlay(
-                  display: val,
-                  onBoxPlayClick: _onBoxPlayClick(idx),
-                );
-              }).toList(),
-            ),
-          ),
-          Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-            ],
-          ),
-          const Text("Hello world"),
-          FloatingActionButton.extended(
-            icon: const Icon(Icons.refresh),
-            label: const Text('Play again'),
-            onPressed: _onFloatButtonClick,
-          )
-        ],
-      ),
+      body: Board(),
     );
   }
 }
