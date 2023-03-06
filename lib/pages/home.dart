@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../widgets/login_form.dart';
 import 'board.dart';
 
 class Home extends StatelessWidget {
@@ -24,6 +25,14 @@ class Home extends StatelessWidget {
     );
   }
 
+  void onFormLoginSubmit(String username, String password) {
+    print("================[onFormLoginSubmit]================");
+    print('text field: ${username}');
+    print('-----');
+    print('text field: ${password}');
+    print("=================================");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +44,11 @@ class Home extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                const Text("Main page"),
+                Container(
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    child: LoginForm(
+                      onSubmit: onFormLoginSubmit,
+                    )),
                 TextButton(
                     onPressed: () => showToast(context),
                     child: const Text('TextButton with custom foreground'))
