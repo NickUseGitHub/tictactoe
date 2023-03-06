@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tictactoe/widgets/error.dart';
 
 import '../widgets/login_form.dart';
 
@@ -50,19 +51,7 @@ class _RegisterState extends State<Register> {
         future: firebase,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("Error"),
-              ),
-              body: Flex(
-                direction: Axis.vertical,
-                children: [
-                  Center(
-                    child: Text(snapshot.error.toString()),
-                  )
-                ],
-              ),
-            );
+            return ErrorMsg(errorMsg: snapshot.error.toString());
           }
 
           if (snapshot.connectionState == ConnectionState.done) {

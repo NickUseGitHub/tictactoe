@@ -1,12 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tictactoe/widgets/error.dart';
 
 import 'register.dart';
 import 'board.dart';
 import '../widgets/login_form.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+
+  Home({super.key});
 
   Future<void> showToast(BuildContext context) async {
     Fluttertoast.showToast(
@@ -34,39 +39,73 @@ class Home extends StatelessWidget {
     );
   }
 
-  void onFormLoginSubmit(String username, String password) {
+  Future<void> onFormLoginSubmit(String username, String password) async {
     print("================Home[onFormLoginSubmit]================");
     print('text field: ${username}');
     print('-----');
     print('text field: ${password}');
     print("=================================");
+
+    try {
+      UserCredential user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: username, password: password);
+
+      print("************** Success **************");
+      print(user.user);
+    } on FirebaseAuthException catch (e) {
+      final String errorMsg = e.toString();
+
+      print(errorMsg);
+      Fluttertoast.showToast(
+          msg: errorMsg,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Flex(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        direction: Axis.vertical,
-        children: [
-          Center(
-            child: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: LoginForm(
-                      btnTitle: "Login",
-                      onSubmit: onFormLoginSubmit,
-                    )),
-                TextButton(
-                    onPressed: () => onTextBtnSignUpClick(context),
-                    child: const Text('Sign Up'))
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+    return FutureBuilder(
+        future: firebase,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return ErrorMsg(errorMsg: snapshot.error.toString());
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Scaffold(
+              body: Flex(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(left: 20, right: 20),
+                            child: LoginForm(
+                              btnTitle: "Login",
+                              onSubmit: onFormLoginSubmit,
+                            )),
+                        TextButton(
+                            onPressed: () => onTextBtnSignUpClick(context),
+                            child: const Text('Sign Up'))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
+
+          return const Scaffold(
+            body: CircularProgressIndicator(),
+          );
+        });
   }
 }
