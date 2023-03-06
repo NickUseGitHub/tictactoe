@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../widgets/login_form.dart';
+
+import 'register.dart';
 import 'board.dart';
+import '../widgets/login_form.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -25,8 +27,15 @@ class Home extends StatelessWidget {
     );
   }
 
+  void onTextBtnSignUpClick(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Register()),
+    );
+  }
+
   void onFormLoginSubmit(String username, String password) {
-    print("================[onFormLoginSubmit]================");
+    print("================Home[onFormLoginSubmit]================");
     print('text field: ${username}');
     print('-----');
     print('text field: ${password}');
@@ -47,11 +56,12 @@ class Home extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(left: 20, right: 20),
                     child: LoginForm(
+                      btnTitle: "Login",
                       onSubmit: onFormLoginSubmit,
                     )),
                 TextButton(
-                    onPressed: () => showToast(context),
-                    child: const Text('TextButton with custom foreground'))
+                    onPressed: () => onTextBtnSignUpClick(context),
+                    child: const Text('Sign Up'))
               ],
             ),
           )

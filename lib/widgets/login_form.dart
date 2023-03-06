@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
   final Function? onSubmit;
+  final String btnTitle;
 
-  const LoginForm({super.key, this.onSubmit});
+  const LoginForm({super.key, required this.btnTitle, this.onSubmit});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -14,6 +15,7 @@ class _LoginFormState extends State<LoginForm> {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  late final String btnTitle;
 
   @override
   void initState() {
@@ -22,6 +24,8 @@ class _LoginFormState extends State<LoginForm> {
     // Start listening to changes.
     usernameController.addListener(() => _printLatestValue(usernameController));
     passwordController.addListener(() => _printLatestValue(passwordController));
+
+    btnTitle = widget.btnTitle;
   }
 
   @override
@@ -87,7 +91,7 @@ class _LoginFormState extends State<LoginForm> {
                 _onFormSubmit();
               }
             },
-            child: const Text('Submit'),
+            child: Text(btnTitle),
           ),
         ],
       ),
