@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './home.dart';
 import '../widgets/boxplay.dart';
 
 class Board extends StatefulWidget {
@@ -36,6 +37,10 @@ class _BoardState extends State<Board> {
       _boxTables = ['', '', '', '', '', '', '', '', ''];
       _countClick = 0;
     });
+  }
+
+  _onFloatBackButtonClick() {
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
   @override
@@ -102,9 +107,17 @@ class _BoardState extends State<Board> {
           ),
           const Text("Hello world"),
           FloatingActionButton.extended(
+            heroTag: "btnPlayAgain",
             icon: const Icon(Icons.refresh),
             label: const Text('Play again'),
             onPressed: _onFloatButtonClick,
+          ),
+          const SizedBox(width: double.infinity, height: 20),
+          FloatingActionButton.extended(
+            heroTag: "backToHome",
+            icon: const Icon(Icons.arrow_back),
+            label: const Text('Back to home'),
+            onPressed: _onFloatBackButtonClick,
           )
         ],
       ),

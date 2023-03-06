@@ -26,13 +26,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(children: [
-        const Text("Main page"),
-        TextButton(
-            onPressed: () => showToast(context),
-            child: Text('TextButton with custom foreground'))
-      ]),
+    return Scaffold(
+      body: Flex(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        direction: Axis.vertical,
+        children: [
+          Center(
+            child: Column(
+              children: [
+                const Text("Main page"),
+                TextButton(
+                    onPressed: () => showToast(context),
+                    child: const Text('TextButton with custom foreground'))
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
