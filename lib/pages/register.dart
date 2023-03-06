@@ -16,7 +16,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
-  Future<void> onFormLoginSubmit(String username, String password) async {
+  Future<void> onFormLoginSubmit(
+      String username, String password, BuildContext context) async {
     print("================Register[onFormLoginSubmit]================");
     print('text field: ${username}');
     print('-----');

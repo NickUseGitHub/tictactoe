@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
-  final Function? onSubmit;
+  final Future Function(String username, String password, BuildContext context)?
+      onSubmit;
   final String btnTitle;
 
   const LoginForm({super.key, required this.btnTitle, this.onSubmit});
@@ -42,9 +43,10 @@ class _LoginFormState extends State<LoginForm> {
     print('text field: ${controller.text}');
   }
 
-  void _onFormSubmit() {
+  Future<void> _onFormSubmit(BuildContext context) async {
     if (widget.onSubmit != null) {
-      widget.onSubmit!(usernameController.text, passwordController.text);
+      await widget.onSubmit!(
+          usernameController.text, passwordController.text, context);
     }
   }
 
@@ -88,7 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                   const SnackBar(content: Text('Processing Data')),
                 );
 
-                _onFormSubmit();
+                _onFormSubmit(context);
               }
             },
             child: Text(btnTitle),

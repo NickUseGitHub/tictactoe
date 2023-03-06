@@ -39,7 +39,8 @@ class Home extends StatelessWidget {
     );
   }
 
-  Future<void> onFormLoginSubmit(String username, String password) async {
+  Future<UserCredential?> onFormLoginSubmit(
+      String username, String password, BuildContext context) async {
     print("================Home[onFormLoginSubmit]================");
     print('text field: ${username}');
     print('-----');
@@ -51,7 +52,13 @@ class Home extends StatelessWidget {
           .signInWithEmailAndPassword(email: username, password: password);
 
       print("************** Success **************");
-      print(user.user);
+
+      if (user.user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Board()),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       final String errorMsg = e.toString();
 
@@ -64,6 +71,8 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
+
+      return null;
     }
   }
 
