@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
+import '../ctx/user_data.dart';
+import './pages/board.dart';
 import './pages/home.dart';
+import './pages/register.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
@@ -84,6 +86,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Home();
+    return ChangeNotifierProvider<UserData>(
+        create: (context) => UserData(),
+        child: MaterialApp(
+          home: Home(),
+          routes: {
+            Home.id: (context) => Home(),
+            Board.id: (context) => const Board(),
+            Register.id: (context) => const Register(),
+          },
+        ));
   }
 }

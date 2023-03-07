@@ -2,13 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tictactoe/widgets/error.dart';
+import 'package:provider/provider.dart';
+
+import '../ctx/user_data.dart';
+import '../widgets/error.dart';
 
 import 'register.dart';
 import 'board.dart';
 import '../widgets/login_form.dart';
 
 class Home extends StatelessWidget {
+  static const String id = 'home_screen';
+
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   Home({super.key});
@@ -54,9 +59,15 @@ class Home extends StatelessWidget {
       print("************** Success **************");
 
       if (user.user != null) {
-        Navigator.push(
+        print("> user.user");
+        print(user.user);
+        print("---------------------");
+
+        Provider.of<UserData>(context, listen: false).setUserData(user);
+
+        Navigator.pushReplacementNamed(
           context,
-          MaterialPageRoute(builder: (context) => const Board()),
+          Board.id,
         );
       }
     } on FirebaseAuthException catch (e) {

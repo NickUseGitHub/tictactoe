@@ -7,6 +7,7 @@ import 'package:tictactoe/widgets/error.dart';
 import '../widgets/login_form.dart';
 
 class Register extends StatefulWidget {
+  static const String id = 'register_screen';
   const Register({super.key});
 
   @override

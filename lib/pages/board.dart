@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import './home.dart';
+import '../ctx/user_data.dart';
 import '../widgets/boxplay.dart';
 
 class Board extends StatefulWidget {
+  static const String id = 'board_screen';
+
   const Board({super.key});
 
   @override
@@ -17,6 +20,10 @@ class _BoardState extends State<Board> {
   @override
   void initState() {
     super.initState();
+  }
+
+  String? getPlayerName(BuildContext context) {
+    return Provider.of<UserData>(context).getUserData()?.user?.email;
   }
 
   _onBoxPlayClick(int index) {
@@ -105,7 +112,7 @@ class _BoardState extends State<Board> {
               ),
             ],
           ),
-          const Text("Hello world"),
+          Text("Hello ${getPlayerName(context)}"),
           FloatingActionButton.extended(
             heroTag: "btnPlayAgain",
             icon: const Icon(Icons.refresh),
