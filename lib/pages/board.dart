@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tictactoe/pages/home.dart';
 
 import '../ctx/user_data.dart';
 import '../widgets/boxplay.dart';
@@ -47,7 +48,10 @@ class _BoardState extends State<Board> {
   }
 
   _onFloatBackButtonClick() {
-    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.pushReplacementNamed(
+      context,
+      Home.id,
+    );
   }
 
   @override
