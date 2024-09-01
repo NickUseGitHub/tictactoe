@@ -46,45 +46,50 @@ class Home extends StatelessWidget {
 
   Future<UserCredential?> onFormLoginSubmit(
       String username, String password, BuildContext context) async {
-    print("================Home[onFormLoginSubmit]================");
-    print('text field: ${username}');
-    print('-----');
-    print('text field: ${password}');
-    print("=================================");
+    Navigator.pushReplacementNamed(
+      context,
+      Board.id,
+    );
 
-    try {
-      UserCredential user = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: username, password: password);
+    // print("================Home[onFormLoginSubmit]================");
+    // print('text field: ${username}');
+    // print('-----');
+    // print('text field: ${password}');
+    // print("=================================");
 
-      print("************** Success **************");
+    // try {
+    //   UserCredential user = await FirebaseAuth.instance
+    //       .signInWithEmailAndPassword(email: username, password: password);
 
-      if (user.user != null) {
-        print("> user.user");
-        print(user.user);
-        print("---------------------");
+    //   print("************** Success **************");
 
-        Provider.of<UserData>(context, listen: false).setUserData(user);
+    //   if (user.user != null) {
+    //     print("> user.user");
+    //     print(user.user);
+    //     print("---------------------");
 
-        Navigator.pushReplacementNamed(
-          context,
-          Board.id,
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      final String errorMsg = e.toString();
+    //     Provider.of<UserData>(context, listen: false).setUserData(user);
 
-      print(errorMsg);
-      Fluttertoast.showToast(
-          msg: errorMsg,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+    //     Navigator.pushReplacementNamed(
+    //       context,
+    //       Board.id,
+    //     );
+    //   }
+    // } on FirebaseAuthException catch (e) {
+    //   final String errorMsg = e.toString();
 
-      return null;
-    }
+    //   print(errorMsg);
+    //   Fluttertoast.showToast(
+    //       msg: errorMsg,
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.CENTER,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Colors.red,
+    //       textColor: Colors.white,
+    //       fontSize: 16.0);
+
+    //   return null;
+    // }
   }
 
   @override

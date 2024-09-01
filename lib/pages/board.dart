@@ -74,6 +74,7 @@ class _BoardState extends State<Board> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         children: <Widget>[
+          const SizedBox(width: double.infinity, height: 80),
           Container(
             height: 500,
             child: GridView.count(
@@ -116,7 +117,7 @@ class _BoardState extends State<Board> {
               ),
             ],
           ),
-          Text("Hello ${getPlayerName(context)}"),
+          // Text("Hello ${getPlayerName(context)}"),
           FloatingActionButton.extended(
             heroTag: "btnPlayAgain",
             icon: const Icon(Icons.refresh),
@@ -124,12 +125,6 @@ class _BoardState extends State<Board> {
             onPressed: _onFloatButtonClick,
           ),
           const SizedBox(width: double.infinity, height: 20),
-          FloatingActionButton.extended(
-            heroTag: "backToHome",
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Back to home'),
-            onPressed: _onFloatBackButtonClick,
-          )
         ],
       ),
     );

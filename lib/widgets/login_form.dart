@@ -60,12 +60,12 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             controller: usernameController,
             // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+            // validator: (value) {
+            //   if (value == null || value.isEmpty) {
+            //     return 'Please enter some text';
+            //   }
+            //   return null;
+            // },
           ),
           // Password
           TextFormField(
@@ -73,25 +73,26 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: true,
             enableSuggestions: false,
             autocorrect: false,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+            // validator: (value) {
+            //   if (value == null || value.isEmpty) {
+            //     return 'Please enter some text';
+            //   }
+            //   return null;
+            // },
           ),
           ElevatedButton(
             onPressed: () {
-              // Validate returns true if the form is valid, or false otherwise.
-              if (_formKey.currentState!.validate()) {
-                // If the form is valid, display a snackbar. In the real world,
-                // you'd often call a server or save the information in a database.
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data')),
-                );
+              // // Validate returns true if the form is valid, or false otherwise.
+              // if (_formKey.currentState!.validate()) {
+              //   // If the form is valid, display a snackbar. In the real world,
+              //   // you'd often call a server or save the information in a database.
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('Processing Data')),
+              //   );
 
-                _onFormSubmit(context);
-              }
+              //   _onFormSubmit(context);
+              // }
+              _onFormSubmit(context);
             },
             child: Text(btnTitle),
           ),

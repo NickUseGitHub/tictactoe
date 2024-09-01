@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../ctx/user_data.dart';
 import './pages/board.dart';
-import './pages/home.dart';
-import './pages/register.dart';
 
 Future<void> main() async {
   // await Firebase.initializeApp();
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'My Tictactoe',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -70,8 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
     // ignore_for_file: avoid_print
-    print('ready in 2...');
-    await Future.delayed(const Duration(seconds: 1));
+    // print('ready in 2...');
+    // await Future.delayed(const Duration(seconds: 1));
     print('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
     print('go!');
@@ -89,11 +87,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return ChangeNotifierProvider<UserData>(
         create: (context) => UserData(),
         child: MaterialApp(
-          home: Home(),
+          home: Board(),
           routes: {
-            Home.id: (context) => Home(),
+            // Home.id: (context) => Home(),
             Board.id: (context) => const Board(),
-            Register.id: (context) => const Register(),
+            // Register.id: (context) => const Register(),
           },
         ));
   }
