@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
 
   Future<void> showToast(BuildContext context) async {
     Fluttertoast.showToast(
-        msg: "Helll yeah",
+        msg: "Hello world V.5",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
