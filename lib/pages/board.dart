@@ -113,7 +113,7 @@ class _BoardState extends State<Board> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const <Widget>[
               Text(
-                'You have pushed the button this many times:',
+                'Press button down below to reset game',
               ),
             ],
           ),
